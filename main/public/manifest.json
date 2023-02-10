@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "OvStats - League Twitch panel",
+  "name": "OvStats - League stats viewer for Twitch",
   "icons": [
     {
       "src": "favicon.ico",
