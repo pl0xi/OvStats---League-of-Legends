@@ -1,9 +1,10 @@
 import './App.css';
+import RankDisplay from './components/RankDisplay';
 
 function App() {
   return (
     <>
-      <h1>OvStats</h1>
+      <RankDisplay />
     </>
   );
 }
