@@ -1,11 +1,16 @@
 import './App.css';
-import RankDisplay from './components/RankDisplay';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PanelPage from "./pages/PanelPage"
+import ConfigPage from "./pages/ConfigPage";
 
 function App() {
   return (
-    <>
-      <RankDisplay />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path='panel' element={<PanelPage />}/>
+        <Route path="config" element={<ConfigPage />}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
