@@ -8,7 +8,7 @@ declare global {
 
 const Config = () => {
     const [summonerName, setSummonerName] = useState("");
-    const [region, setRegion] = useState("");
+    const [region, setRegion] = useState("euw1");
     
     useEffect(() => {    
         window.Twitch.ext.onAuthorized((auth : any) => {});
@@ -16,7 +16,20 @@ const Config = () => {
     
     const submit = (e : any) => {
         e.preventDefault();
-        window.Twitch.ext.configuration.set("broadcaster", "1", JSON.stringify([summonerName, region]));
+
+        fetch(`https://localhost:7256/api/league/verifyAccount?username=${summonerName}&region=${region}`)
+            .then(response => {
+                if(response.status == 200) {
+                    window.Twitch.ext.configuration.set("broadcaster", "1", JSON.stringify([summonerName, region]));
+                    console.log("Account set")
+                } else {
+                    // WIP 
+                    console.log("Account not found")
+                }
+                
+                return response;
+            })
+
     }
 
     return (
@@ -27,12 +40,12 @@ const Config = () => {
                     setSummonerName(event.target.value)
                 }}/>
                 <label htmlFor="region">Region</label>
-                <select id="region" required value={region} onChange={(event) => {
-                    setRegion(event.target.value)
+                <select id="region" defaultValue="euw1" required onChange={(event) => {
+                    setRegion(event.target.value);
                 }}>
                     <option disabled>BR</option>
-                    <option disabled>EUNE</option>
-                    <option >EUW</option>
+                    <option value="eune">EUNE</option>
+                    <option value="euw1">EUW</option>
                     <option disabled>LAN</option>
                     <option disabled>LAS</option>
                     <option disabled>NA</option>
