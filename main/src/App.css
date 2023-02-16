@@ -25,9 +25,23 @@ body {
 }
 
 #divisionImage {
-  height: 200px;
+  height: 150px;
 }
 
 #divisonTierTitle {
   font-size: 20px;
+}
+
+#rankDisplayFlexItem {
+  flex-grow: 2;
+}
+
+#summonerName {
+  margin-bottom: 0px;
+  margin-top: 30px;
+}
+
+#divisonTierTitle {
+  margin-top: 0px;
+  font-size: 16px;
 }
