@@ -9,7 +9,9 @@ declare global {
 const Config = () => {
     const [summonerName, setSummonerName] = useState("");
     const [region, setRegion] = useState("euw1");
-    
+    const [failed, setFailed] = useState("none");
+    const [success, setSuccess] = useState("none");
+
     useEffect(() => {    
         window.Twitch.ext.onAuthorized((auth : any) => {});
     }, []);
@@ -19,22 +21,36 @@ const Config = () => {
 
         fetch(`https://localhost:7256/api/league/verifyAccount?username=${summonerName}&region=${region}`)
             .then(response => {
-                if(response.status == 200) {
+                if(response.status === 200) {
                     window.Twitch.ext.configuration.set("broadcaster", "1", JSON.stringify([summonerName, region]));
-                    console.log("Account set")
+                    setSuccess("block");
                 } else {
-                    // WIP 
-                    console.log("Account not found")
+                    setFailed("block")
                 }
                 
+                removeNotification();
                 return response;
             })
+    }
 
+    const removeNotification = () => {
+        setTimeout(() => {
+            setFailed("none");
+            setSuccess("none");
+        }, 1500)
     }
 
     return (
-        <>
-            <form onSubmit={submit}>
+        <>  
+            <div id="notification">
+                <div id="success" style={{display: success}}>
+                    <p>Summoner set successfully</p>
+                </div>
+                <div id="failed" style={{display: failed}}>
+                    <p>Summoner not found</p>
+                </div>
+            </div>
+            <form id="summonerConfig" onSubmit={submit}>
                 <label htmlFor="summonerName">Summoner Name:</label>
                 <input id="summonerName" required value={summonerName} onChange={(event) => {
                     setSummonerName(event.target.value)
