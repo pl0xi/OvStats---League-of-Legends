@@ -6,7 +6,11 @@ const RankDisplay = () => {
     const [summonerName, setSummonerName] = useState("Extension is not configured!");
     const [tier, setTier] = useState("Loading..");
     const [rank, setRank] = useState ("Loading..");
-    const [rankBadge, setRankbagde] = useState(divisions.Iron)
+    const [rankBadge, setRankbagde] = useState(divisions.Iron);
+    const [lp, setLP] = useState("Loading..")
+    const[wins, setWins] = useState("Loading..")
+    const [losses, setLosses] = useState("Loading..")
+
     useEffect(() => {    
         window.Twitch.ext.onAuthorized((auth : any) => {
             var config = JSON.parse(window.Twitch.ext.configuration.broadcaster.content);
@@ -20,7 +24,10 @@ const RankDisplay = () => {
                     console.log(data)
                     setTier(data.tier)
                     setRank(data.rank)
-                    
+                    setLP(data.leaguePoints)
+                    setWins(data.wins)
+                    setLosses(data.losses);
+
                     switch (data.tier) {
                         case "IRON":
                             setRankbagde(divisions.Iron);
@@ -64,7 +71,10 @@ const RankDisplay = () => {
             <img id="divisionImage" src={rankBadge} alt="league rank"/>
             <div id="rankDisplayFlexItem">
                 <h1 id="summonerName">{summonerName}</h1>
-                <h1 id="divisonTierTitle">{tier} - {rank}</h1>
+                <h2 id="divisonTierTitle">{tier} - {rank} ({lp} LP)</h2>
+            </div>
+            <div id="lpAndLosses">
+                <p>WIN: {wins} - LOSS: {losses}</p>
             </div>
         </div>
     )
