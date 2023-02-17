@@ -5,7 +5,7 @@ import Gold from "./Gold.png";
 import Platinum from "./Platinum.png";
 import Diamond from "./Diamond.png";
 import Master from "./Master.png";
-import GrandMaster from "./GrandMaster.png";
+import Grandmaster from "./Grandmaster.png";
 import Challenger from "./Challenger.png";
 
 const divisions = {
@@ -16,7 +16,7 @@ const divisions = {
     Platinum,
     Diamond,
     Master,
-    GrandMaster,
+    Grandmaster,
     Challenger
 };
 
