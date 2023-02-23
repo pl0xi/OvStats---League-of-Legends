@@ -18,7 +18,7 @@ const RankDisplay = () => {
             if(config[0] != "") {
                 setSummonerName(config[0])
                 
-                fetch(`https://localhost:7256/api/league/playerInfo?username=${config[0]}&region=${config[1]}`)
+                fetch(`https://localhost:7256/api/league/summoner?username=${config[0]}&region=${config[1]}`)
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data)

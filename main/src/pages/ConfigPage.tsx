@@ -19,7 +19,7 @@ const Config = () => {
     const submit = (e : any) => {
         e.preventDefault();
 
-        fetch(`https://localhost:7256/api/league/verifyAccount?username=${summonerName}&region=${region}`)
+        fetch(`https://localhost:7256/api/league/summoner/verify?username=${summonerName}&region=${region}`)
             .then(response => {
                 if(response.status === 200) {
                     window.Twitch.ext.configuration.set("broadcaster", "1", JSON.stringify([summonerName, region]));
