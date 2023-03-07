@@ -15,13 +15,13 @@ const RankDisplay = () => {
         window.Twitch.ext.onAuthorized((auth : any) => {
             var config = JSON.parse(window.Twitch.ext.configuration.broadcaster.content);
 
-            if(config[0] != "") {
+            if(config[0] !== null) {
                 setSummonerName(config[0])
                 
                 fetch(`https://localhost:7256/api/league/summoner?username=${config[0]}&region=${config[1]}`)
                 .then((response) => response.json())
-                .then((data) => {
-                    console.log(data)
+                .then((responseJson) => {
+                    var data = responseJson.data;
                     setTier(data.tier)
                     setRank(data.rank)
                     setLP(data.leaguePoints)

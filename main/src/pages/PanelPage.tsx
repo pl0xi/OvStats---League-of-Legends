@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import MatchHistory from "../components/MatchHistory";
 import RankDisplay from "../components/RankDisplay";
 
 const Panel = () => {
@@ -7,6 +8,7 @@ const Panel = () => {
         <>
             <Header />
             <RankDisplay />
+            <MatchHistory />
         </>
     )
 }
