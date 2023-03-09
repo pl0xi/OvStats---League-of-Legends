@@ -6,7 +6,7 @@ const MatchHistory = () => {
   const [user, setUser] = useState()
 
   useEffect(() => {
-    window.Twitch.ext.onAuthorized((auth: any) => {
+    window.Twitch.ext.onAuthorized(() => {
       var config = JSON.parse(
         window.Twitch.ext.configuration.broadcaster.content
       );

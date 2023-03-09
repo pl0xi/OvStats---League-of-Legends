@@ -29,10 +29,6 @@ body {
   height: 150px;
 }
 
-#divisonTierTitle {
-  font-size: 20px;
-}
-
 #rankDisplayFlexItem {
   flex-grow: 2;
   margin-left: -10px;
@@ -45,7 +41,7 @@ body {
 
 #divisonTierTitle {
   margin-top: 0px;
-  font-size: 16px;
+  font-size: 11px;
 }
 
 #notification {
