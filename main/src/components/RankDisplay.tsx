@@ -1,23 +1,22 @@
 import divisions from "../images/Divisions";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const RankDisplay = () => {
 
-    const [summonerName, setSummonerName] = useState("Extension is not configured!");
-    const [tier, setTier] = useState("Loading..");
-    const [rank, setRank] = useState ("Loading..");
+    const [summonerName, setSummonerName] = useState();
+    const [tier, setTier] = useState();
+    const [rank, setRank] = useState();
     const [rankBadge, setRankbagde] = useState(divisions.Iron);
-    const [lp, setLP] = useState("Loading..")
-    const[wins, setWins] = useState("Loading..")
-    const [losses, setLosses] = useState("Loading..")
-
-    useEffect(() => {    
-        window.Twitch.ext.onAuthorized((auth : any) => {
-            var config = JSON.parse(window.Twitch.ext.configuration.broadcaster.content);
-
+    const [lp, setLP] = useState()
+    const [wins, setWins] = useState()
+    const [losses, setLosses] = useState()
+    const [loading, setLoading] = useState(true)
+   
+    window.Twitch.ext.configuration.onChanged(() => {
+        var config = JSON.parse(window.Twitch.ext.configuration.broadcaster.content);
+ 
             if(config[0] !== null) {
                 setSummonerName(config[0])
-                
                 fetch(`https://localhost:7256/api/league/summoner?username=${config[0]}&region=${config[1]}`)
                 .then((response) => response.json())
                 .then((responseJson) => {
@@ -27,7 +26,7 @@ const RankDisplay = () => {
                     setLP(data.leaguePoints)
                     setWins(data.wins)
                     setLosses(data.losses);
-
+    
                     switch (data.tier) {
                         case "IRON":
                             setRankbagde(divisions.Iron);
@@ -60,14 +59,17 @@ const RankDisplay = () => {
                             setRankbagde(divisions.Iron);
                             break;
                     }
-
+                    setLoading(false)
                 })
             }
-        });
-    }, []);
+    })
 
-    return (
-        <div id="rankDisplay">
+
+    if(loading) {
+        return <></>
+    } else {
+        return (
+            <div id="rankDisplay">
             <img id="divisionImage" src={rankBadge} alt="league rank"/>
             <div id="rankDisplayFlexItem">
                 <h1 id="summonerName">{summonerName}</h1>
@@ -77,7 +79,8 @@ const RankDisplay = () => {
                 <p>WIN: {wins} - LOSS: {losses}</p>
             </div>
         </div>
-    )
+        )
+    }
 }
 
 export default RankDisplay;
