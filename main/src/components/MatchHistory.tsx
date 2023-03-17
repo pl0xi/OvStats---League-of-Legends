@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const MatchHistory = () => {
+const MatchHistory = (props:any) => {
 
   const [matches, setMatches] = useState([])
   const [user, setUser] = useState()
@@ -18,9 +18,10 @@ const MatchHistory = () => {
         .then((responseJson) => {
             setUser(responseJson.data.playerPuuid)
             setMatches(responseJson.data.matches);
+            props.setLoaded(true)
           });
-      }
-    });
+        }
+      });
   }, []); 
 
   function calculateTimeDiff(time : number) : string {
@@ -62,7 +63,6 @@ const MatchHistory = () => {
                     <p>{calculateTimeDiff(match.info.gameEndTimestamp)}</p>
                     <p>{getGameResult(match)}</p>
                   </div>
-                  
                   ))}
             </div>
         </div>

@@ -1,7 +1,7 @@
 import divisions from "../images/Divisions";
 import { useState } from "react";
 
-const RankDisplay = () => {
+const RankDisplay = (props : any) => {
 
     const [summonerName, setSummonerName] = useState();
     const [tier, setTier] = useState();
@@ -10,7 +10,6 @@ const RankDisplay = () => {
     const [lp, setLP] = useState()
     const [wins, setWins] = useState()
     const [losses, setLosses] = useState()
-    const [loading, setLoading] = useState(true)
    
     window.Twitch.ext.configuration.onChanged(() => {
         var config = JSON.parse(window.Twitch.ext.configuration.broadcaster.content);
@@ -59,28 +58,24 @@ const RankDisplay = () => {
                             setRankbagde(divisions.Iron);
                             break;
                     }
-                    setLoading(false)
+                    props.setLoaded(true)
                 })
             }
     })
-
-
-    if(loading) {
-        return <></>
-    } else {
-        return (
-            <div id="rankDisplay">
-            <img id="divisionImage" src={rankBadge} alt="league rank"/>
-            <div id="rankDisplayFlexItem">
-                <h1 id="summonerName">{summonerName}</h1>
-                <h2 id="divisonTierTitle">{tier} - {rank} ({lp} LP)</h2>
-            </div>
-            <div id="lpAndLosses">
-                <p>WIN: {wins} - LOSS: {losses}</p>
-            </div>
+  
+    return (
+        <div id="rankDisplay">
+        <img id="divisionImage" src={rankBadge} alt="league rank"/>
+        <div id="rankDisplayFlexItem">
+            <h1 id="summonerName">{summonerName}</h1>
+            <h2 id="divisonTierTitle">{tier} - {rank} ({lp} LP)</h2>
         </div>
-        )
-    }
+        <div id="lpAndLosses">
+            <p>WIN: {wins} - LOSS: {losses}</p>
+        </div>
+    </div>
+    )
+    
 }
 
 export default RankDisplay;
