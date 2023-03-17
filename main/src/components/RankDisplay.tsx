@@ -69,9 +69,7 @@ const RankDisplay = (props : any) => {
         <div id="rankDisplayFlexItem">
             <h1 id="summonerName">{summonerName}</h1>
             <h2 id="divisonTierTitle">{tier} - {rank} ({lp} LP)</h2>
-        </div>
-        <div id="lpAndLosses">
-            <p>WIN: {wins} - LOSS: {losses}</p>
+            <h3 id="winLoss">WIN: {wins} - LOSS: {losses}</h3>
         </div>
     </div>
     )
