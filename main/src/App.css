@@ -92,10 +92,12 @@ body {
   margin-bottom: 10px;
   background-color: gray;
   border-radius: 5px;
-  padding: 5px;
+  padding: 2px 5px 2px 5px;
   margin-left: 15px;
   margin-right: 15px;
   flex-wrap: nowrap;
+  height: 37px;
+  justify-content: space-between;
 }
 
 .match > p {
@@ -156,4 +158,30 @@ body {
   100% {
     background-color: rgb(34, 34, 34);
   }
+}
+
+.loss {
+  background-color: red;
+}
+
+.win {
+  background-color: green;
+}
+
+.matchDate {
+  font-size: 12px;
+}
+
+.matchFirstBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.matchFirstBox > p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.gameResult {
+  align-self: center;
 }

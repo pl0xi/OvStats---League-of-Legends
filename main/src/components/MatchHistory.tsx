@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const MatchHistory = (props:any) => {
 
@@ -38,19 +38,21 @@ const MatchHistory = (props:any) => {
     }
   }
 
-  function getGameResult(match: any) : string {
+  var matchRef = useRef({deaths: 0, kills: 0, assists: 0, win: false});
+
+  function getGameWon(match_: any) : boolean {
     if(user) {
-        var matchState = match.info.participants.find((participant : any) => 
+        matchRef.current = match_.info.participants.find((participant : any) => 
           participant.puuid === user
         )
 
-        if(matchState.win) {
-          return "WON"
+        if(matchRef.current.win) {
+          return true
         } else {
-          return "LOST"
+          return false
         }
     } else {
-      return "Error: Missing configuration"
+      return false
     }
   }
 
@@ -59,10 +61,26 @@ const MatchHistory = (props:any) => {
             <h1>Match History</h1>
             <div id="matches">
                 {matches.map((match : any) => (
-                  <div className="match"> 
-                    <p>{calculateTimeDiff(match.info.gameEndTimestamp)}</p>
-                    <p>{getGameResult(match)}</p>
-                  </div>
+                  getGameWon(match) ? 
+                    ( 
+                      <div className="match win"> 
+                        <div className="matchFirstBox">
+                          <p className="matchDate">{calculateTimeDiff(match.info.gameEndTimestamp)}</p>
+                          <p>{matchRef.current.kills}/{matchRef.current.deaths}/{matchRef.current.assists}</p>
+                        </div>
+                        <p className="gameResult">WIN</p>
+                      </div>
+                    )
+                    : (
+                      <div className="match loss"> 
+                        <div className="matchFirstBox">
+                          <p className="matchDate">{calculateTimeDiff(match.info.gameEndTimestamp)}</p>
+                          
+                          <p>{matchRef.current.kills}/{matchRef.current.deaths}/{matchRef.current.assists}</p>
+                        </div>
+                        <p className="gameResult">LOSS</p>
+                      </div>
+                    )
                   ))}
             </div>
         </div>
