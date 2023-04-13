@@ -13,6 +13,9 @@ This project is built with React and TypeScript.
 ## Preview
 ![Skærmbillede 2023-04-06 140130](https://user-images.githubusercontent.com/39574422/230373279-26147de1-e712-4848-a429-1df945f62264.png)
 
+# Roadmap
+- [ ] Show items in match.
+- [ ] Show champion selected in match.
 
 # Guide for development
 This project is dependent on a backend service (https://github.com/pl0xi/OvStats-Website)
