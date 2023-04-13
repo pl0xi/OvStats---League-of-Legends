@@ -18,7 +18,8 @@ This project is built with React and TypeScript.
 - [ ] Show champion selected in match.
 
 # Guide for development
-This project is dependent on a backend service (https://github.com/pl0xi/OvStats-Website)
+This project is dependent on a backend service (https://github.com/pl0xi/OvStats-Website).
+
 This project requires:
 - Node.js
 - npm/yarn
