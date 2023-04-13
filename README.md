@@ -12,3 +12,6 @@ This project is dependent on a backend service (https://github.com/pl0xi/OvStats
 This project requires:
 - Node.js
 - npm/yarn
+
+# License 
+This project is licensed under the MIT License.
