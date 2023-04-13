@@ -16,6 +16,7 @@ This project is built with React and TypeScript.
 # Roadmap
 - [ ] Show items in match.
 - [ ] Show champion selected in match.
+- [ ] Change queue type (Ranked Solo/Duo, Ranked Flex, Normal Draft)
 
 # Guide for development
 This project is dependent on a backend service (https://github.com/pl0xi/OvStats-Website).
